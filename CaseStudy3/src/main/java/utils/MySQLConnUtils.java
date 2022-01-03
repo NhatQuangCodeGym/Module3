@@ -9,7 +9,7 @@ public class MySQLConnUtils {
     public static Connection getConnection() {
         String jdbcURL = "jdbc:mysql://localhost:3306/student_management?useSSL=false";
         String jdbcUsername = "root";
-        String jdbcPassword = "Quang849107";
+        String jdbcPassword = "quang849107";
 
         Connection connection = null;
         try {
