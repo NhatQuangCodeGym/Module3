@@ -24,4 +24,8 @@ public class MySQLConnUtils {
         }
         return connection;
     }
+
+    public static void main(String[] args) {
+
+    }
 }
