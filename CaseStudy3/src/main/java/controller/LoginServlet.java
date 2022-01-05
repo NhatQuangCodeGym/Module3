@@ -12,18 +12,23 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
+import java.nio.charset.StandardCharsets;
 
 @WebServlet (name = "LoginServlet", urlPatterns = "/login")
 public class LoginServlet extends HttpServlet {
     AccountDAO accountDAO = new AccountDAO();
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        req.setCharacterEncoding(StandardCharsets.UTF_8.toString());
+        resp.setCharacterEncoding(StandardCharsets.UTF_8.toString());
         RequestDispatcher dispatcher = req.getRequestDispatcher("/index.jsp");
         dispatcher.forward(req, resp);
     }
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        req.setCharacterEncoding(StandardCharsets.UTF_8.toString());
+        resp.setCharacterEncoding(StandardCharsets.UTF_8.toString());
         String username = req.getParameter("username");
         String password = req.getParameter("password");
 

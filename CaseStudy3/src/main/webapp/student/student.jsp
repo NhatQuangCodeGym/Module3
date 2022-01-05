@@ -1,68 +1,45 @@
-
 <%--
   Created by IntelliJ IDEA.
-  User: Admin
-  Date: 8/2/2021
-  Time: 2:10 PM
+  User: macbookprom1
+  Date: 29/12/2021
+  Time: 21:44
   To change this template use File | Settings | File Templates.
 --%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<!DOCTYPE html>
-<html lang="en">
-    <head>
-        <title>Quản lý Sinh viên</title>
-        <!-- Table datatable css -->
-        <link href="/assets/libs/datatables/dataTables.bootstrap4.min.css" rel="stylesheet" type="text/css">
-        <link href="/assets/libs/datatables/responsive.bootstrap4.min.css" rel="stylesheet" type="text/css">
-        <%@ include file="/layout/head.jsp"%>
-        <style>
-            .btn-me {
-                margin: 0 5px;
-            }
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<html>
+<head>
+    <title>Phần mềm quản lý điểm</title>
+    <%@ include file="../layout/head.jsp"%>
+</head>
 
-            #btn-trash {
-                color: #e74c3c;
-                cursor: pointer;
-            }
-
-            #btn-trash:hover {
-                color: #c0392b;
-            }
-
-            #btn-edit {
-                color: #f39c12;
-            }
-
-            #btn-edit:hover {
-                color: #e67e22;
-            }
-        </style>
-
-    </head>
-    <body data-layout="horizontal">
-    <div id="wrapper">
-        <!-- Navigation Bar-->
-        <%@ include file="/layout/head.jsp"%>
-        <!-- End Navigation Bar-->
-
-        <!-- Start Page Content here -->
-        <div class="content-page" >
-            <!-- Start content -->
-            <div class="content">
-                <!-- Start container-fluid-->
-                <div class="container-fluid">
-
-                    <!-- start page title -->
-                    <div class="row">
-                        <div class="col-12">
-                            <h3 class="page-title"><a href="student" style="text-decoration: none; color: black">Quản lý Sinh viên</a></h3>
-                        </div>
-                    </div>
-                    <!-- end page title -->
-
-                    <div class="row">
+<body class="hold-transition sidebar-mini layout-fixed">
+<div class="wrapper">
+    <%@ include file="../layout/header.jsp"%>
+    <%@ include file="../layout/sidebarleft.jsp"%>
+    <!-- Content Wrapper. Contains page content -->
+    <div class="content-wrapper">
+        <!-- Content Header (Page header) -->
+        <div class="content-header">
+            <div class="container-fluid">
+                <div class="row mb-2">
+                    <div class="col-sm-6">
+                        <h1 class="m-0 text-dark">Danh sách học sinh</h1>
+                    </div><!-- /.col -->
+                    <div class="col-sm-6">
+                        <ol class="breadcrumb float-sm-right">
+                            <li class="breadcrumb-item"><a href="#">Home</a></li>
+                            <li class="breadcrumb-item active">Dashboard v1</li>
+                        </ol>
+                    </div><!-- /.col -->
+                </div><!-- /.row -->
+            </div><!-- /.container-fluid -->
+        </div>
+        <!-- Main content -->
+        <section class="content">
+            <div class="container-fluid">
+                <div class="row">
+                    <%--            Content here--%>
                         <div class="col-sm-12">
                             <div class="card-box table-responsive">
                                 <div class="row justify-content-between mb-2 mr-2 ml-2">
@@ -80,18 +57,18 @@
                                         <th scope="col">Họ và tên</th>
                                         <th scope="col">Giới tính</th>
                                         <th scope="col">Ngày sinh</th>
-<%--                                        <th scope="col">Email</th>--%>
+                                        <%--                                        <th scope="col">Email</th>--%>
                                         <th scope="col">Địa chỉ</th>
                                         <th scope="col">Số điện thoại</th>
                                         <th scope="col">Trạng thái</th>
                                         <th scope="col">Thao tác</th>
                                     </tr>
                                     </thead>
+                                    <tbody>
+                                    <c:forEach var="student" items="${requestScope['listStudent']}">
 
-                                    <c:forEach var="student" items="${listStudent}">
-                                        <tbody>
                                         <tr class="text-center" >
-                                            <td scope="row">${student.getId()}</td>
+                                            <td scope="row">${student.id}</td>
                                             <td>${student.getName()}</td>
 
                                             <c:if test="${student.getGender() == 1}">
@@ -102,7 +79,7 @@
                                             </c:if>
 
                                             <td>${student.getDob()}</td>
-<%--                                            <td>${student.getMail()}</td>--%>
+                                                <%--                                            <td>${student.getMail()}</td>--%>
                                             <td>${student.getAddress()}</td>
                                             <td>${student.getPhoneNum()}</td>
 
@@ -131,9 +108,11 @@
                                                     <i class="fas fa-info-circle"></i>
                                                 </a>
                                             </td>
+
                                         </tr>
-                                        </tbody>
+
                                     </c:forEach>
+                                    </tbody>
                                 </table>
 
                                 <nav aria-label="Page navigation example">
@@ -151,107 +130,13 @@
                                 </nav>
                             </div>
                         </div>
-                    </div>
                 </div>
-                <!-- end container-fluid -->
             </div>
-            <!-- end content -->
-
-            <!-- Footer Start -->
-            <%@ include file="/layout/footer.jsp"%>
-            <!-- end Footer -->
-        </div>
-        <!-- End Page content -->
-
+        </section>
+        <!-- /.content-header -->
     </div>
-    <!-- END wrapper -->
-
-    <div id="alert">
-            <c:if test='${requestScope["success"] != null}'>
-                <div class="alert alert-success" style="position: fixed; top: 130px; right: 115px">
-                    <strong>Success!</strong> ${requestScope["success"]}
-                </div>
-                <script>
-                    $(".alert-success").delay(4000).slideUp(500, function() {
-                        $(this).alert('close');
-                    });
-                </script>
-            </c:if>
-            <c:if test='${requestScope["error"] != null}'>
-                <div class="alert alert-danger" style="position: fixed; bottom: 0; right: 0; left: 0">
-                    <button type="button" class="close" data-dismiss="alert">x</button>
-                    <strong>Error!</strong> ${requestScope["error"]}
-                </div>
-                <script>
-                    $(document).ready(function() {
-                        $("#submit").click(function () {
-                            $(".alert-danger").slideUp("slow");
-                        });
-
-                        $(".close").click(function () {
-                            $(".alert-danger").slideUp("slow");
-                        });
-                    });
-                </script>
-
-            </c:if>
-            <c:if test='${requestScope["warning"] != null}'>
-                <div class="alert alert-warning" style="position: fixed; bottom: 0; right: 0; left: 0">
-                    <button type="button" class="close" data-dismiss="alert">x</button>
-                    <strong>Warning!</strong> ${requestScope["warning"]}
-                </div>
-                <script>
-                    $(document).ready(function() {
-                        $("#submit").click(function () {
-                            $(".alert-warning").slideUp("slow");
-                        });
-                        $(".close").click(function () {
-                            $(".alert-warning").slideUp("slow");
-                        });
-                    });
-                </script>
-            </c:if>
-        </div>
-
-    <!-- Modal -->
-    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered">
-            <div class="modal-content">
-                <form action ="${pageContext.request.contextPath}/student?action=delete" method="post">
-                    <div class="modal-body text-center">
-                        <i class="fas fa-exclamation-triangle" style="font-size: 100px; margin: 15px auto; color: #f8bb86"></i>
-                        <h3> Bạn có chắc chắn muốn xóa? </h3>
-                    </div>
-                    <input type="text" id="id" name="id" style="display: none">
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-danger" data-dismiss="modal" style="position: relative; left: -10px;">Đóng</button>
-                        <button type="submit" class="btn btn-primary" style="position: relative; left: -230px;">Xác nhận</button>
-                    </div>
-                </form>
-            </div>
-        </div>
-    </div>
-
-
-    <!-- Script Start -->
-    <%@ include file="/layout/script.jsp"%>
-    <script>
-        $(".delete").click(function () {
-            const ids = $(this).attr('data-id');
-            $("#id").val(ids);
-            $('#exampleModal').modal('show');
-        });
-
-        // $(document).ready(function () {
-        //     $('#myTable').DataTable();
-        //     $('#myTable_filter').addClass("d-none");
-        // })
-
-
-
-    </script>
-    <!-- END Script -->
+    <%@ include file="../layout/footer.jsp"%>
+</div>
 </body>
+<%@ include file="../layout/script.jsp"%>
 </html>
-
-

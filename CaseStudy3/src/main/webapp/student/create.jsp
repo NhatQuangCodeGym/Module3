@@ -1,141 +1,86 @@
-<%--
-  Created by IntelliJ IDEA.
-  User: Admin
-  Date: 8/2/2021
-  Time: 9:01 PM
-  To change this template use File | Settings | File Templates.
---%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-    <title>Thêm mới</title>
-    <%@ include file="/layout/head.jsp"%>
+    <title>Phần mềm quản lý điểm</title>
+    <%@ include file="../layout/head.jsp"%>
 </head>
-<body data-layout="horizontal">
-    <div id="wrapper">
-        <!-- Navigation Bar-->
-        <%@ include file="/layout/head.jsp"%>
-        <!-- End Navigation Bar-->
 
-        <!-- Start Page Content here -->
-        <div class="content-page">
-            <!-- Start content -->
-            <div class="content">
-                <!-- Start container-fluid-->
-                <div class="container-fluid">
+<body class="hold-transition sidebar-mini layout-fixed">
+<div class="wrapper">
+    <%@ include file="../layout/header.jsp"%>
+    <%@ include file="../layout/sidebarleft.jsp"%>
+    <!-- Content Wrapper. Contains page content -->
+    <div class="content-wrapper">
+        <!-- Content Header (Page header) -->
+        <div class="content-header">
+            <div class="container-fluid">
+                <div class="row mb-2">
+                    <div class="col-sm-6">
+                        <h1 class="m-0 text-dark">Tạo sinh viên</h1>
+                    </div><!-- /.col -->
+                    <div class="col">
 
-                    <!-- start page title -->
-                    <div class="col-12">
-                        <h2 class="page-title">Thêm học sinh</h2>
                     </div>
-                    <div class="col-12">
-                        <a href="student">Trở về trang quản lý</a>
-                    </div>
-                    <!-- end page title -->
-
-                    <form method="post" class="row">
-                        <div class="form-group col-12 col-sm-12 col-md-4">
-                            <label>Họ và tên: </label>
-                            <input type="text" name="name" class="form-control" id="name" placeholder="Select the name">
-                        </div>
-                        <div class="form-group col-12 col-sm-12 col-md-4">
-                            <label>Gender: </label>
-                            <select name="gender" class="form-control">
-                                <option value="1">Male</option>
-                                <option value="0">Female</option>
-                            </select>
-                        </div>
-                        <div class="form-group col-12 col-sm-12 col-md-4">
-                            <label>Date of birth: </label>
-                            <input type="date" name="dob" class="form-control" id="dob" >
-                        </div>
-                        <div class="form-group col-12 col-sm-12 col-md-4">
-                            <label>Email: </label>
-                            <input type="email" name="mail" class="form-control" id="mail" >
-                        </div>
-                        <div class="form-group col-12 col-sm-12 col-md-4">
-                            <label>Address: </label>
-                            <input type="text" name="address" class="form-control" id="address" >
-                        </div>
-                        <div class="form-group col-12 col-sm-12 col-md-4">
-                            <label>Phone Number: </label>
-                            <input type="text" name="phoneNum" class="form-control" id="phoneNum" placeholder="+1 (545) 409-2137">
-                        </div>
-
-                        <div class="form-group col-12 col-sm-12 col-md-2">
-                            <button type="submit" class="btn btn-primary" id="submit">Thêm mới</button>
-                        </div>
-                    </form>
-
-                </div>
-                <!-- end container-fluid -->
-            </div>
-            <!-- end content -->
-
-            <!-- Footer Start -->
-            <%@ include file="/layout/footer.jsp"%>
-            <!-- end Footer -->
+                    <div class="col">
+                        <ol class="breadcrumb float-sm-right">
+                            <li class="breadcrumb-item"><a href="#">Home</a></li>
+                            <li class="breadcrumb-item active">Dashboard v1</li>
+                        </ol>
+                    </div><!-- /.col -->
+                </div><!-- /.row -->
+            </div><!-- /.container-fluid -->
         </div>
-        <!-- End Page content -->
-    </div>
-    <!-- END wrapper -->
+        <!-- Main content -->
+        <section class="content">
+            <div class="container-fluid">
+                <div class="row">
+                    <%--            Content here--%>
 
-    <div id="alert">
-        <c:if test='${requestScope["success"] != null}'>
-            <script>
-                Swal.fire({
-                    icon: 'success',
-                    title: 'New student was created',
-                    showConfirmButton: false,
-                    timer: 1500
-                })
-            </script>
-        </c:if>
-        <c:if test='${requestScope["error"] != null}'>
-            <div class="alert alert-danger" style="position: fixed; bottom: 0; right: 0; left: 0">
-                <button type="button" class="close" data-dismiss="alert">x</button>
-                <strong>Error!</strong> ${requestScope["error"]}
+                        <form method="post" >
+
+                                <label>Họ và tên: </label>
+                                <input type="text" name="name" class="form-control" id="name" placeholder="Select the name">
+
+
+                                <label>Giới tính: </label>
+                                <select name="gender" class="form-control">
+                                    <option value="1">Nam</option>
+                                    <option value="0">Nữ</option>
+                                </select>
+
+
+                                <label>Ngày sinh: </label>
+                                <input type="date" name="dob" class="form-control" id="dob" >
+
+
+                                <label>Email: </label>
+                                <input type="email" name="mail" class="form-control" id="mail" >
+
+
+                                <label>Địa chỉ: </label>
+                                <input type="text" name="address" class="form-control" id="address" >
+
+
+                                <label>Số điện thoại: </label>
+                                <input type="text" name="phoneNum" class="form-control" id="phoneNum" placeholder="+1 (545) 409-2137">
+
+
+<%--                            <div class="form-group col-12 col-sm-12 col-md-2">--%>
+<%--                                <button type="submit" class="btn btn-primary" id="submit">Thêm mới</button>--%>
+<%--                                <button type="submit" class="btn btn-primary" href="student">Quay lại</button>--%>
+<%--                                <a href="#" class="btn btn-success" id="submit">Thêm mới</a>--%>
+<%--                                <a href="#" class="btn btn-warning" href="student">Quay lại </a>--%>
+                            <input type="submit" value="Thêm mới" class="btn btn-success" id="submit">
+                            <a class="btn btn-warning" href="student">Quay lại </a>
+<%--                            </div>--%>
+                        </form>
+                </div>
             </div>
-            <script>
-                $(document).ready(function() {
-                    $("#submit").click(function () {
-                        // $(".alert-danger").show();
-                        $(".alert-danger").slideUp("slow");
-                    });
-
-                    $(".close").click(function () {
-                        // $(".alert-danger").hide();
-                        $(".alert-danger").slideUp("slow");
-                    });
-                });
-            </script>
-        </c:if>
-        <c:if test='${requestScope["warning"] != null}'>
-            <div class="alert alert-warning" style="position: fixed; bottom: 0; right: 0; left: 0">
-                <button type="button" class="close" data-dismiss="alert">x</button>
-                <strong>Warning!</strong> ${requestScope["warning"]}
-            </div>
-            <script>
-                $(document).ready(function() {
-                    $("#submit").click(function () {
-                        // $(".alert-warning").show();
-                        $(".alert-warning").slideUp("slow");
-                    });
-                    $(".close").click(function () {
-                        // $(".alert-warning").hide();
-                        $(".alert-warning").slideUp("slow");
-                    });
-
-                });
-            </script>
-        </c:if>
+        </section>
+        <!-- /.content-header -->
     </div>
-
-    <!-- Script Start -->
-    <%@ include file="/layout/script.jsp"%>
-    <!-- END Script -->
+    <%@ include file="../layout/footer.jsp"%>
+</div>
 </body>
+<%@ include file="../layout/script.jsp"%>
 </html>

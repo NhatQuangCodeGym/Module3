@@ -1,40 +1,25 @@
 package DAO;
 
 import model.Account;
+import utils.MySQLConnUtils;
 
 import java.sql.*;
 
 public class AccountDAO implements IAccountDAO {
-    private String jdbcURL = "jdbc:mysql://localhost:3306/student_management?useSSL=false";
-    private String jdbcUsername = "root";
-    private String jdbcPassword = "quang849107";
+
 
     public AccountDAO() {
     }
 
-    protected Connection getConnection() {
-        Connection connection = null;
-        try {
-            Class.forName("com.mysql.cj.jdbc.Driver");
-            connection = DriverManager.getConnection(jdbcURL, jdbcUsername, jdbcPassword);
-        } catch (SQLException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-        } catch (ClassNotFoundException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-        }
-        return connection;
-    }
+
 
     @Override
     public Account selectAccount(String username, String password) {
-        String SELECT_ACCOUNT_SQL = "SELECT * FROM accounts\n" +
-                "WHERE username = ? \n" +
-                "AND `password` = ?;";
+        String SELECT_ACCOUNT_SQL = "select * from accounts where username =? and password =?";
+
         Account account = null;
 
-        Connection connection = getConnection();
+        Connection connection = MySQLConnUtils.getConnection();
         try {
             PreparedStatement ps = connection.prepareStatement(SELECT_ACCOUNT_SQL);
             ps.setString(1, username);

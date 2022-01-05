@@ -13,6 +13,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
+import java.nio.charset.StandardCharsets;
 import java.sql.SQLException;
 import java.util.List;
 
@@ -22,6 +23,8 @@ public class StudentServlet extends HttpServlet {
     private AccountDAO accountDAO = new AccountDAO();
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        request.setCharacterEncoding(StandardCharsets.UTF_8.toString());
+        response.setCharacterEncoding(StandardCharsets.UTF_8.toString());
         HttpSession session = request.getSession();
         String username = (String) session.getAttribute("acc");
         String password = (String) session.getAttribute("pass");
@@ -61,6 +64,8 @@ public class StudentServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        request.setCharacterEncoding(StandardCharsets.UTF_8.toString());
+        response.setCharacterEncoding(StandardCharsets.UTF_8.toString());
         String action = request.getParameter("action");
         if (action == null) {
             action = "";
@@ -93,7 +98,7 @@ public class StudentServlet extends HttpServlet {
         List<Student> studentList = studentDAO.selectAllStudents();
         System.out.println(studentList.size());
         request.setAttribute("listStudent", studentList);
-        RequestDispatcher dispatcher = request.getRequestDispatcher("student/student.jsp");
+        RequestDispatcher dispatcher = request.getRequestDispatcher("/student/student.jsp");
         dispatcher.forward(request, response);
     }
     private void showCreateStudent(HttpServletRequest request, HttpServletResponse response)

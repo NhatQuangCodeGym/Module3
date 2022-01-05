@@ -15,7 +15,7 @@ public class StudentDAO implements IStudentDAO{
 
     @Override
     public void insertStudent(Student student) throws SQLException {
-        String INSERT_STUDENT_SQL = "INSERT INTO students (name_stu, gender, dob, email, address, phoneNum, status) " +
+        String INSERT_STUDENT_SQL = "INSERT INTO students (name, gender, dob, email, address, phoneNum, status) " +
                 "VALUES (?, ?, ?, ?, ?, ?, ?);";
 
         Connection connection = MySQLConnUtils.getConnection();
@@ -30,8 +30,9 @@ public class StudentDAO implements IStudentDAO{
             ps.setString(6, student.getPhoneNum());
             ps.setInt(7, student.getStatus());
 
-            System.out.println(ps);
-            ps.executeUpdate();
+//            System.out.println(ps);
+            int d= ps.executeUpdate();
+            System.out.println(d);
         } catch (SQLException ex){
             printSQLException(ex);
         }
@@ -40,7 +41,7 @@ public class StudentDAO implements IStudentDAO{
 
     @Override
     public Student selectStudent(String id) {
-        String SELECT_STUDENT_SQL_BY_ID = "SELECT id, name_stu, gender, dob, email, address, phoneNum, status, image " +
+        String SELECT_STUDENT_SQL_BY_ID = "SELECT id, name, gender, dob, email, address, phoneNum, status, image " +
                 "FROM students WHERE id = ?;";
         Student student = null;
 
@@ -54,7 +55,7 @@ public class StudentDAO implements IStudentDAO{
 
             while (rs.next()) {
                 int idDB = rs.getInt("id");
-                String name_stu = rs.getString("name_stu");
+                String name_stu = rs.getString("name");
                 int gender = rs.getInt("gender");
                 String dob = rs.getString("dob");
                 String mail = rs.getString("email");
@@ -73,7 +74,7 @@ public class StudentDAO implements IStudentDAO{
 
     @Override
     public List<Student> selectAllStudents() {
-        String SELECT_ALL_STUDENT_SQL = "SELECT id, name_stu, gender, dob, email, address, phoneNum, status FROM students ORDER BY id desc;";
+        String SELECT_ALL_STUDENT_SQL = "SELECT id, name, gender, dob, email, address, phoneNum, status FROM students ORDER BY id desc;";
         List<Student> students = new ArrayList<>();
 
         Connection connection = MySQLConnUtils.getConnection();
@@ -85,7 +86,7 @@ public class StudentDAO implements IStudentDAO{
 
             while (rs.next()) {
                 int id = rs.getInt("id");
-                String name_stu = rs.getString("name_stu");
+                String name_stu = rs.getString("name");
                 int gender = rs.getInt("gender");
                 String dob = rs.getString("dob");
                 String mail = rs.getString("email");
@@ -126,7 +127,7 @@ public class StudentDAO implements IStudentDAO{
     @Override
     public boolean updateStudent(Student student) throws SQLException {
         boolean update = false;
-        String UPDATE_STUDENT_SQL = "UPDATE students SET name_stu = ?, gender = ?, dob = ?, email = ?, " +
+        String UPDATE_STUDENT_SQL = "UPDATE students SET name = ?, gender = ?, dob = ?, email = ?, " +
                 "address = ?, phoneNum = ?, status = ?, image = ? WHERE id = ?";
         Connection connection = MySQLConnUtils.getConnection();
 
@@ -158,7 +159,7 @@ public class StudentDAO implements IStudentDAO{
 
     @Override
     public List<Student> searchStudent(String searchName) throws SQLException {
-        String SEARCH_STUDENT_SQL = "SELECT id, name_stu, gender, dob, email, address, phoneNum, status FROM students WHERE name_stu LIKE ?;";
+        String SEARCH_STUDENT_SQL = "SELECT id, name, gender, dob, email, address, phoneNum, status FROM students WHERE name_stu LIKE ?;";
         List<Student> students = new ArrayList<>();
         Connection connection = MySQLConnUtils.getConnection();
 
@@ -170,7 +171,7 @@ public class StudentDAO implements IStudentDAO{
 
             while (rs.next()) {
                 int id = rs.getInt("id");
-                String name_stu = rs.getString("name_stu");
+                String name_stu = rs.getString("name");
                 int gender = rs.getInt("gender");
                 String dob = rs.getString("dob");
                 String mail = rs.getString("email");
