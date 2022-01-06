@@ -99,7 +99,7 @@
                                                    title="Edit" class="btn-me" id="btn-edit">
                                                     <i class="fa fa-edit"></i>
                                                 </a>
-                                                <a data-id="${student.id}" title="Delete" data-toggle="modal"
+                                                <a href="${pageContext.request.contextPath}/student?action=delete&id=${student.getId()}" title="Delete"
                                                    class="btn-me delete" id="btn-trash">
                                                     <i class="fa fa-trash"></i>
                                                 </a>

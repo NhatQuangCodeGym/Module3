@@ -265,7 +265,7 @@ public class StudentServlet extends HttpServlet {
 
             listStudent(request, response);
         } else {
-            studentDAO.deleteStudent(id);
+            boolean check= studentDAO.deleteStudent(id);
             request.setAttribute("success", "Student has been deleted");
             request.setAttribute("error", null);
             request.setAttribute("warning", null);

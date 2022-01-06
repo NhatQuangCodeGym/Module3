@@ -110,13 +110,14 @@ public class StudentDAO implements IStudentDAO{
 
     @Override
     public boolean deleteStudent(String id) throws SQLException {
+        int newId = Integer.parseInt(id);
         boolean check = false;
         String DELETE_STUDENT_SQL = "DELETE FROM students WHERE id = ?";
         Connection connection = MySQLConnUtils.getConnection();
 
         try {
             PreparedStatement ps = connection.prepareStatement(DELETE_STUDENT_SQL);
-            ps.setString(1, id);
+            ps.setInt(1, newId);
             check = ps.executeUpdate() > 0;
         }catch (SQLException ex){
             printSQLException(ex);
