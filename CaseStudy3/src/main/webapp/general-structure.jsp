@@ -16,7 +16,7 @@
 <div class="wrapper">
     <%@ include file="/layout/header.jsp"%>
     <%@ include file="/layout/sidebarleft.jsp"%>
-        <!-- Content Wrapper. Contains page content -->
+    <!-- Content Wrapper. Contains page content -->
     <div class="content-wrapper">
         <!-- Content Header (Page header) -->
         <div class="content-header">
@@ -38,7 +38,7 @@
         <section class="content">
             <div class="container-fluid">
                 <div class="row">
-<%--            Content here--%>
+                    <%--            Content here--%>
 
                 </div>
             </div>

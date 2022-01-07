@@ -97,7 +97,7 @@ public class StudentServlet extends HttpServlet {
             throws SQLException, IOException, ServletException {
         List<Student> studentList = studentDAO.selectAllStudents();
         System.out.println(studentList.size());
-        request.setAttribute("listStudent", studentList);
+        request.setAttribute("listInstructor", studentList);
         RequestDispatcher dispatcher = request.getRequestDispatcher("/student/student.jsp");
         dispatcher.forward(request, response);
     }
@@ -236,11 +236,11 @@ public class StudentServlet extends HttpServlet {
             request.setAttribute("error", "This student is not on the list");
             request.setAttribute("warning", null);
 
-            request.setAttribute("listStudent", studentList);
+            request.setAttribute("listInstructor", studentList);
             RequestDispatcher dispatcher = request.getRequestDispatcher("student/student.jsp");
             dispatcher.forward(request, response);
         } else {
-            request.setAttribute("listStudent", studentList);
+            request.setAttribute("listInstructor", studentList);
             RequestDispatcher dispatcher = request.getRequestDispatcher("student/student.jsp");
             dispatcher.forward(request, response);
         }

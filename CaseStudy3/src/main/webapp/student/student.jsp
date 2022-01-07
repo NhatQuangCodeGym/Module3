@@ -65,7 +65,7 @@
                                     </tr>
                                     </thead>
                                     <tbody>
-                                    <c:forEach var="student" items="${requestScope['listStudent']}">
+                                    <c:forEach var="student" items="${requestScope['listInstructor']}">
 
                                         <tr class="text-center" >
                                             <td scope="row">${student.id}</td>

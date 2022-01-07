@@ -103,10 +103,6 @@ public class StudentDAO implements IStudentDAO{
         return students;
     }
 
-//    @Override
-//    public List<Student> selectAllStudentsExceptId(int id) {
-//        return null;
-//    }
 
     @Override
     public boolean deleteStudent(String id) throws SQLException {
@@ -160,7 +156,7 @@ public class StudentDAO implements IStudentDAO{
 
     @Override
     public List<Student> searchStudent(String searchName) throws SQLException {
-        String SEARCH_STUDENT_SQL = "SELECT id, name, gender, dob, email, address, phoneNum, status FROM students WHERE name_stu LIKE ?;";
+        String SEARCH_STUDENT_SQL = "SELECT id, name, gender, dob, email, address, phoneNum, status FROM students WHERE name LIKE ?;";
         List<Student> students = new ArrayList<>();
         Connection connection = MySQLConnUtils.getConnection();
 
