@@ -43,22 +43,16 @@
                         <div class="col-12">
                             <h2 class="page-title">Thông tin học sinh</h2>
                         </div>
-                        <div class="col-12">
-                            <a href="student">Trở về trang quản lý</a>
+<%--                        <div class="col-12">--%>
+<%--                            <a href="student">Trở về trang quản lý</a>--%>
                         </div>
 
                         <div class="row">
-                            <div class="col-12 col-sm-12 col-md-4">
-                                <figure class="figure">
-                                    <img src="${student.getImage()}" class="figure-img img-fluid rounded"
-                                         style="width: 370px; height: 370px" alt="Lỗi">
-                                </figure>
-                            </div>
                             <div class="col-12 col-sm-12 col-md-8">
                                 <div class="row">
                                     <label class="col-8"><span class="font-weight-bold">Họ và tên:</span> ${instructor.getName()}</label>
                                 </div>
-                                <c:if test="${student.getGender()} == 1">
+                                <c:if test="${instructor.getGender()} == 1">
                                     <div class="row">
                                         <label class="col-8"><span class="font-weight-bold">Giới tính:</span> Nam</label>
                                     </div>

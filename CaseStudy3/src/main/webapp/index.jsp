@@ -9,131 +9,269 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-  <title>Đăng nhập</title>
-  <%@ include file="/layout/head.jsp"%>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>This is a WebPage using Bootstrap 4</title>
+  <!-- Import Boostrap css, js, font awesome here -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
+  <link href="https://use.fontawesome.com/releases/v5.0.4/css/all.css" rel="stylesheet">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js">
+  </script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js">
+  </script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
+  <link href="home/css/style.css" rel="stylesheet">
 </head>
 <body>
-<div class="account-pages mt-5 mb-5">
-  <div class="container">
-    <div class="row justify-content-center">
-      <div class="col-md-8 col-lg-6 col-xl-5">
-        <div class="card">
-
-          <div class="text-center account-logo-box">
-            <div class="mt-2 mb-2">
-              <a href="index.html" class="text-success">
-                <span><img src="assets\images\logo.png" alt="" height="36"></span>
-              </a>
-            </div>
-          </div>
-
-          <div class="card-body">
-
-            <form action="/login" method="post">
-
-              <div class="form-group">
-                <input class="form-control" type="text" id="username"  name="username" placeholder="Username">
-              </div>
-
-              <div class="form-group">
-                <input class="form-control" type="password" name="password" id="password" placeholder="Password">
-              </div>
-
-              <div class="form-group">
-                <div class="custom-control custom-checkbox checkbox-success">
-                  <input type="checkbox" class="custom-control-input" id="checkbox-signin" checked="">
-                  <label class="custom-control-label" for="checkbox-signin">Remember me</label>
-                </div>
-              </div>
-
-              <div class="form-group text-center mt-4 pt-2">
-                <div class="col-sm-12">
-                  <a href="#" class="text-muted"><i class="fa fa-lock mr-1"></i> Forgot your password?</a>
-                </div>
-              </div>
-
-              <div class="form-group account-btn text-center mt-2">
-                <div class="col-12">
-                  <button class="btn width-md btn-bordered btn-danger waves-effect waves-light" type="submit">Log In</button>
-                </div>
-              </div>
-            </form>
-
-          </div>
-          <!-- end card-body -->
-        </div>
-        <!-- end card -->
-
-        <div class="row mt-5">
-          <div class="col-sm-12 text-center">
-            <p class="text-muted">Don't have an account? <a href="page-register.html" class="text-primary ml-1"><b>Sign Up</b></a></p>
-          </div>
-        </div>
-
-      </div>
-      <!-- end col -->
+<!-- Navigation -->
+<nav class="navbar navbar-expand-md navbar-light bg-light sticky-top">
+  <div class="container-fluid">
+    <a class="navbar-branch" href="#">
+      <img src="home/images/logo.png" height="80">
+    </a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarResponsive">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarResponsive">
+      <ul class="navbar-nav ml-auto">
+        <li class="nav-item">
+          <a class="nav-link active" href="#">Home</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#">About</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#">Services</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#">Team</a>
+        </li>
+        <li class="nav-item" data-toggle="dropdown">
+          <a class="nav-link" href="#">Connect"</a>
+        </li>
+      </ul>
     </div>
-    <!-- end row -->
   </div>
-  <!-- end container -->
-</div>
-<!-- end page -->
-
-<div id="alert">
-  <c:if test='${requestScope["success"] != null}'>
-    <script>
-      Swal.fire({
-        icon: 'success',
-        title: 'New student was created',
-        showConfirmButton: false,
-        timer: 1500
-      })
-    </script>
-  </c:if>
-  <c:if test='${requestScope["error"] != null}'>
-    <div class="alert alert-danger" style="position: fixed; bottom: 0; right: 0; left: 0">
-      <button type="button" class="close" data-dismiss="alert">x</button>
-      <strong>Error!</strong> ${requestScope["error"]}
+</nav>
+<!-- Carousel -->
+<div id="slides" class="carousel slide" data-ride="carousel">
+  <ul class="carousel-indicators">
+    <li data-target="#slides" data-slide-to="0" class="active"></li>
+    <li data-target="#slides" data-slide-to="1"></li>
+    <li data-target="#slides" data-slide-to="2"></li>
+    <li data-target="#slides" data-slide-to="3"></li>
+  </ul>
+  <div class="carousel-inner">
+    <div class="carousel-item active">
+      <img src="home/images/IELTS.jpg">
+      <!-- <div class="carousel-caption">
+          <h1 class="display-2">Example</h1>
+          <h3>Autolayout with Boostrap</h3>
+          <button type="button" class="btn btn-outline-light btn-lg">
+              VIEW TUTORIALS
+          </button>
+          <button type="button" class="btn btn-primary btn-lg">Get started</button>
+      </div> -->
     </div>
-    <script>
-      $(document).ready(function() {
-        $("#submit").click(function () {
-          // $(".alert-danger").show();
-          $(".alert-danger").slideUp("slow");
-        });
-        $(".close").click(function () {
-          // $(".alert-danger").hide();
-          $(".alert-danger").slideUp("slow");
-        });
-      });
-    </script>
-  </c:if>
-  <c:if test='${requestScope["warning"] != null}'>
-    <div class="alert alert-warning" style="position: fixed; bottom: 0; right: 0; left: 0">
-      <button type="button" class="close" data-dismiss="alert">x</button>
-      <strong>Warning!</strong> ${requestScope["warning"]}
+    <div class="carousel-item">
+      <img src="home/images/ielts-banner.jpg">
     </div>
-    <script>
-      $(document).ready(function() {
-        $("#submit").click(function () {
-          // $(".alert-warning").show();
-          $(".alert-warning").slideUp("slow");
-        });
-        $(".close").click(function () {
-          // $(".alert-warning").hide();
-          $(".alert-warning").slideUp("slow");
-        });
-      });
-    </script>
-  </c:if>
+    <div class="carousel-item">
+      <img src="home/images/Basic-Spoken-English-Course-Lets-Talk-English-speaking-Institute-in-Mumbai-Thane.jpg">
+    </div>
+    <div class="carousel-item">
+      <img src="home/images/English course progression.jpeg">
+    </div>
+  </div>
 </div>
-
-<!-- Vendor js -->
-<script src="assets\js\vendor.min.js"></script>
-
-<!-- App js -->
-<script src="assets\js\app.min.js"></script>
+<!-- jumbotron -->
+<div class="container-fluid">
+  <div class="jumbotron">
+    <div class="col-xs-12 col-sm-12 col-md-9 col-lg-9 col-xl-10" >
+      <p style="text-align: center;" >Ready for the future</p>
+    </div>
+    <div class="col-xs-12 col-sm-12 col-md-3 col-lg-3 col-xl-2 mx-auto"  >
+      <a href="#">
+        <button  type="button" class="btn btn-outline-secondary" >Open at : 7.30 a.m</button>
+      </a>
+    </div>
+  </div>
+</div>
+<div class="container-fluid padding">
+  <div class="row welcome text-center">
+    <div class="col-12">
+      <h1 class="display-4">Trung tâm Anh Ngữ Mr.Q</h1>
+    </div>
+    <!-- Horizontal Rule -->
+    <hr>
+    <div class="col-12">
+      <p>Welcome to my institution. This is where you can find yourself confident and helpful</p>
+    </div>
+  </div>
+</div>
+<div class="container-fluid padding">
+  <div class="row text-center padding">
+    <div class="col-xs-12 col-sm-6 col-md-4 ">
+      <i class="fab fa-react"></i>
+      <h3>FOUNDATION FOR IELTS</h3>
+      <p>The ELTS Foundation is a course designed specifically for those who want to take the IELTS test, but their level is still low and basic, at the pre-intermediate level.  </p>
+    </div>
+    <div class="col-xs-12 col-sm-6 col-md-4">
+      <i class="fab fa-angular"></i>
+      <h3>English Academy</h3>
+      <p>For High-school Students</p>
+    </div>
+    <div class="col-sm-12 col-md-4">
+      <i class="fab fa-css3"></i>
+      <h3>CSS3 , HTML5</h3>
+      <p>Customize your web UI with Html5 and Css3</p>
+    </div>
+  </div>
+  <hr class="my-4">
+</div>
+<div class="container-fluid padding">
+  <div class="row padding">
+    <div class="col-md-12 col-lg-6">
+      <h2>If you build it...</h2>
+      <p>Arduino is an open-source hardware, software and content platform with a global community. It’s intended for anyone making interactive projects.</p>
+      <p>Arduino Education is a dedicated team formed by education experts, content developers, engineers and interaction designers from all around the world</p>
+      <br>
+    </div>
+    <div class="col-lg-6">
+      <img src="home/images/laptop.JPG" class="img-fluid">
+    </div>
+  </div>
+</div>
+<hr class="my-2">
+<button class="fun" data-toggle="collapse" data-target="#emoji">
+  Click for fun
+</button>
+<div id="emoji" class="collapse">
+  <div class="container-fluid padding">
+    <div class="row text-center">
+      <div class="col-sm-6 col-md-3">
+        <img class="gif" src="home/images/gif/blinkEyes.gif" width="100" height="100">
+      </div>
+      <div class="col-sm-6 col-md-3">
+        <img class="gif" src="home/images/gif/blinkGirl.gif" width="100" height="100">
+      </div>
+      <div class="col-sm-6 col-md-3">
+        <img class="gif" src="home/images/gif/faceHaha.gif" width="100" height="100">
+      </div>
+      <div class="col-sm-6 col-md-3">
+        <img class="gif" src="home/images/gif/haha.gif" width="100" height="100">
+      </div>
+    </div>
+  </div>
+</div>
+<div class="container-fluid padding">
+  <div class="row welcome text-center">
+    <div class="col-12">
+      <h1 class="display-4">Meet our staff</h1>
+    </div>
+  </div>
+</div>
+<div class="container-fluid padding">
+  <div class="row padding">
+    <div class="col-md-4">
+      <div class="card">
+        <img class="card-img-top" src="home/images/QuangLe.jpg" height="500px">
+        <div class="card-body">
+          <h4 class="card-title">Nhat Quang Le</h4>
+          <p class="card-text">Co-Founder of English Mr.Q</p>
+          <a href="#" class="btn btn-outline-secondary">See profile</a>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-4">
+      <div class="card">
+        <img class="card-img-top" src="home/images/TrangMember.png" height="500px">
+        <div class="card-body">
+          <h4 class="card-title">
+            Trang Le
+          </h4>
+          <p class="card-text">Trang Le </p>
+          <a href="#" class="btn btn-outline-secondary">See profile</a>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-4">
+      <div class="card">
+        <img class="card-img-top" src="home/images/Natasha.png">
+        <div class="card-body">
+          <h4 class="card-title">
+            Natasha
+          </h4>
+          <p class="card-text">Natasha is a web designer, she has 5 years of experiences in UI/UX</p>
+          <a href="#" class="btn btn-outline-secondary">See profile</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="container-fluid padding">
+  <div class="row padding">
+    <div class="col-md-12 col-lg-6">
+      <h2>Our vision</h2>
+      <p>All our work is for customer satisfaction with high quality products</p>
+      <p>We make outsourcing all softwares relating to CMS, Database, Education</p>
+      <br>
+    </div>
+    <div class="col-lg-6">
+      <img src="home/images/mission.jpg" class="img-fluid">
+    </div>
+  </div>
+  <hr class="my-4">
+</div>
+<div class="container-fluid padding">
+  <div class="row text-center padding">
+    <div class="col-12">
+      <h2>Contact us</h2>
+    </div>
+    <div class="col-12 social padding">
+      <a href="#"><i class="fab fa-facebook"></i></a>
+      <a href="#"><i class="fab fa-twitter"></i></a>
+      <a href="#"><i class="fab fa-google-plus-g"></i></a>
+      <a href="#"><i class="fab fa-instagram"></i></a>
+      <a href="#"><i class="fab fa-youtube"></i></a>
+    </div>
+  </div>
+</div>
+<footer>
+  <div class="container-fluid padding">
+    <div class="row text-center">
+      <div class="col-md-4">
+        <img src="home/images/logo.png">
+        <hr class="light">
+        <p>111-222-3333</p>
+        <p>mymail@gmail.com</p>
+        <p>Bach Mai street, Hanoi, Vietnam</p>
+      </div>
+      <div class="col-md-4">
+        <hr class="light">
+        <h5>Working hours</h5>
+        <hr class="light">
+        <p>Monday-Friday: 8am - 5pm</p>
+        <p>Weekend: 8am - 12am</p>
+      </div>
+      <div class="col-md-4">
+        <hr class="light">
+        <h5>Services</h5>
+        <hr class="light">
+        <p>Outsourcing</p>
+        <p>Website development</p>
+        <p>Mobile applications</p>
+      </div>
+      <div class="col-12">
+        <hr class="light-100">
+        <h5>&copy; WebPro</h5>
+      </div>
+    </div>
+  </div>
+</footer>
 </body>
 </html>
+

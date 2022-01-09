@@ -117,21 +117,21 @@ public class InstructorDAO implements IInstructorDAO{
         Connection connection = MySQLConnUtils.getConnection();
 
         try {
-            connection.setAutoCommit(false);
+//            connection.setAutoCommit(false);
             PreparedStatement ps = connection.prepareStatement(UPDATE_INSTRUCTOR_SQL);
-
             ps.setString(1, instructor.getName());
             ps.setInt(2, instructor.getGender());
             ps.setString(3, instructor.getMail());
             ps.setString(4, instructor.getAddress());
+            ps.setString(5, instructor.getPhoneNum());
             ps.setInt(6, instructor.getId());
-            ps.executeUpdate();
-
-            connection.commit();
-            connection.setAutoCommit(true);
-            update = true;
+           update=  ps.executeUpdate() > 0;
+//
+//            connection.commit();
+//            connection.setAutoCommit(true);
+//            update = true;
         } catch (SQLException ex){
-            connection.rollback();
+//            connection.rollback();
             printSQLException(ex);
         }
 

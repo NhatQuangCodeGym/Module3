@@ -31,7 +31,7 @@ public class InstructorServlet extends HttpServlet {
 
         Account account = accountDAO.selectAccount(username, password);
         if (account == null) {
-            response.sendRedirect("/login");
+            response.sendRedirect("/admin");
         } else {
             String action = request.getParameter("action");
             if (action == null) {
@@ -98,6 +98,8 @@ public class InstructorServlet extends HttpServlet {
         List<Instructor> instructorList = instructorDAO.selectAllInstructors();
         System.out.println("list in: "+ instructorList.size());
         System.out.println(instructorList.size());
+        String check = request.getParameter("check");
+        request.setAttribute("check",check);
         request.setAttribute("list", instructorList);
         RequestDispatcher dispatcher = request.getRequestDispatcher("/instructor/instructor.jsp");
         dispatcher.forward(request, response);
@@ -142,6 +144,8 @@ public class InstructorServlet extends HttpServlet {
         } else {
             Instructor newInstructor = new Instructor(nameIns,Integer.parseInt(gender), mail, address, phoneNum);
             instructorDAO.insertInstructor(newInstructor);
+            RequestDispatcher dispatcher = request.getRequestDispatcher("instructor/create.jsp");
+            request.setAttribute("message", "New instructor was created");
 //            System.out.println(newInstructor.getMail());
             request.setAttribute("success", "New instructor was created");
             request.setAttribute("error", null);
@@ -165,44 +169,47 @@ public class InstructorServlet extends HttpServlet {
     }
     private void updateInstructor(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, SQLException, IOException {
-        String id = request.getParameter("id");
+        int id = Integer.parseInt(request.getParameter("id"));
         String name = request.getParameter("name");
-        String gender = request.getParameter("gender");
+        int gender = Integer.parseInt(request.getParameter("gender"));
         String mail = request.getParameter("mail");
         String address = request.getParameter("address");
         String phoneNum = request.getParameter("phoneNum");
-
-
-        if (name.equals("") || gender.equals("") || mail.equals("") || address.equals("") || phoneNum.equals("")) {
-            request.setAttribute("success", null);
-            request.setAttribute("error", "Bad or missing input information!");
-            request.setAttribute("warning", null);
-            showEditInstructor(request, response);
-        } else if (!checkInput.validateName(name)) {
-            request.setAttribute("success", null);
-            request.setAttribute("error", null);
-            request.setAttribute("warning", "Invalid name value");
-            showEditInstructor(request, response);
-        } else if (!checkInput.validateMail(mail)) {
-            request.setAttribute("success", null);
-            request.setAttribute("error", null);
-            request.setAttribute("warning", "Invalid email value");
-            showEditInstructor(request, response);
-        } else if (!checkInput.validatePhone(phoneNum)) {
-            request.setAttribute("success", null);
-            request.setAttribute("error", null);
-            request.setAttribute("warning", "Invalid phone number value");
-            showEditInstructor(request, response);
-        } else {
-            Instructor newInstructor = new Instructor(Integer.parseInt(id), name,
-                    Integer.parseInt(gender), mail, address, phoneNum);
-            instructorDAO.updateInstructor(newInstructor);
-
-            request.setAttribute("success", "New instructor was created");
-            request.setAttribute("error", null);
-            request.setAttribute("warning", null);
-            showEditInstructor(request, response);
-        }
+        boolean check = false;
+//
+//        if (name.equals("") || mail.equals("") || address.equals("") || phoneNum.equals("")) {
+//            request.setAttribute("success", null);
+//            request.setAttribute("error", "Bad or missing input information!");
+//            request.setAttribute("warning", null);
+//            showEditInstructor(request, response);
+//        } else if (!checkInput.validateName(name)) {
+//            request.setAttribute("success", null);
+//            request.setAttribute("error", null);
+//            request.setAttribute("warning", "Invalid name value");
+//            showEditInstructor(request, response);
+//        } else if (!checkInput.validateMail(mail)) {
+//            request.setAttribute("success", null);
+//            request.setAttribute("error", null);
+//            request.setAttribute("warning", "Invalid email value");
+//            showEditInstructor(request, response);
+//        } else if (!checkInput.validatePhone(phoneNum)) {
+//            request.setAttribute("success", null);
+//            request.setAttribute("error", null);
+//            request.setAttribute("warning", "Invalid phone number value");
+//            showEditInstructor(request, response);
+//        } else {
+            Instructor newInstructor = new Instructor(id, name, gender, mail, address, phoneNum);
+            check= instructorDAO.updateInstructor(newInstructor);
+           // RequestDispatcher dispatcher=request.getRequestDispatcher("/instructor?check="+check);
+//            request.setAttribute("success", "New instructor was created");
+//            request.setAttribute("error", null);
+//            request.setAttribute("warning", null);
+//            request.setAttribute("check", check);
+     //      listInstructor(request,response);
+         //  dispatcher.forward(request,response);
+            response.sendRedirect(request.getContextPath()+"/instructor?check="+check);
+           // showEditInstructor(request, response);
+       // }
     }
 
 
@@ -224,16 +231,17 @@ public class InstructorServlet extends HttpServlet {
             throws ServletException, SQLException, IOException {
         String str = request.getParameter("string-search");
         List<Instructor> instructorList = instructorDAO.searchInstructor(str);
+        System.out.println(instructorList);
         if (instructorList == null) {
             request.setAttribute("success", null);
             request.setAttribute("error", "This instructor is not on the list");
             request.setAttribute("warning", null);
 
-            request.setAttribute("listInstructor", instructorList);
+            request.setAttribute("list", instructorList);
             RequestDispatcher dispatcher = request.getRequestDispatcher("instructor/instructor.jsp");
             dispatcher.forward(request, response);
         } else {
-            request.setAttribute("listInstructor", instructorList);
+            request.setAttribute("list", instructorList);
             RequestDispatcher dispatcher = request.getRequestDispatcher("instructor/instructor.jsp");
             dispatcher.forward(request, response);
         }

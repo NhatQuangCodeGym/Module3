@@ -31,7 +31,7 @@ public class StudentServlet extends HttpServlet {
 
         Account account = accountDAO.selectAccount(username, password);
         if (account == null) {
-            response.sendRedirect("/login");
+            response.sendRedirect("/admin");
         } else {
             String action = request.getParameter("action");
             if (action == null) {

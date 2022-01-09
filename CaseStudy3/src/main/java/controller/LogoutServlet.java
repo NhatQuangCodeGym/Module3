@@ -26,7 +26,7 @@ public class LogoutServlet extends HttpServlet {
 
         Account account = accountDAO.selectAccount(username, password);
         if (account == null) {
-            resp.sendRedirect("/index.jsp");
+            resp.sendRedirect("/admin.jsp");
         } else {
             resp.sendRedirect("/student");
         }

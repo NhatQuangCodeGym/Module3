@@ -1,3 +1,4 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
@@ -31,6 +32,8 @@
             </div><!-- /.container-fluid -->
         </div>
         <!-- Main content -->
+
+
         <section class="content">
             <div class="container-fluid">
                 <div class="row">
@@ -46,14 +49,25 @@
                             <div class="form-group col-12 col-sm-12 col-md-4">
                                 <label>Giới tính: </label>
                                 <select name="gender" class="form-control">
-                                    <c:if test="${instructor.getGender() == 1}">
-                                        <option value="1">Nam</option>
-                                        <option value="0">Nữ</option>
-                                    </c:if>
-                                    <c:if test="${instructor.getGender() == 0}">
-                                        <option value="0">Nữ</option>
-                                        <option value="1">Nam</option>
-                                    </c:if>
+                                    <c:choose>
+                                        <c:when test="${instructor.getGender() == 1}">
+                                            <option value="1" selected>Nam</option>
+                                            <option value="0">Nữ</option>
+                                        </c:when>
+                                        <c:when test="${instructor.getGender() == 0}">
+                                            <option value="1" >Nam</option>
+                                            <option value="0 selected">Nữ</option>
+                                        </c:when>
+                                    </c:choose>
+<%--                                    <c:if test="${instructor.getGender() == 1}">--%>
+<%--                                        <option value="1" selected>Nam</option>--%>
+<%--                                        <option value="0">Nữ</option>--%>
+<%--                                    </c:if>--%>
+
+<%--                                    <c:if test="${instructor.getGender() == 0}">--%>
+<%--                                        <option value="0">Nữ</option>--%>
+<%--                                        <option value="1">Nam</option>--%>
+<%--                                    </c:if>--%>
                                 </select>
                             </div>
                             <div class="form-group col-12 col-sm-12 col-md-4">
