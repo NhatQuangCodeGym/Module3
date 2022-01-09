@@ -118,43 +118,30 @@ public class InstructorServlet extends HttpServlet {
         String phoneNum = request.getParameter("phoneNum");
 
         if (nameIns.equals("") || gender.equals("") || mail.equals("") || address.equals("") || phoneNum.equals("")) {
-            request.setAttribute("success", null);
-            request.setAttribute("error", "Bad or missing input information!");
-            request.setAttribute("warning", null);
-//            System.out.println("1");
+            request.setAttribute("message", "Bad or missing input information!");
+         showCreateInstructor(request,response);
 
-            RequestDispatcher dispatcher = request.getRequestDispatcher("/instructor/create.jsp");
-            dispatcher.forward(request, response);
+
         } else if (!checkInput.validateName(nameIns)) {
-            request.setAttribute("success", null);
-            request.setAttribute("error", null);
-            request.setAttribute("warning", "Invalid name value");
-            RequestDispatcher dispatcher = request.getRequestDispatcher("/instructor/create.jsp");
-            dispatcher.forward(request, response);
+            request.setAttribute("message", "Invalid name value");
+            showCreateInstructor(request,response);
+
         } else if (!checkInput.validateMail(mail)) {
-            request.setAttribute("success", null);
-            request.setAttribute("error", null);
-            request.setAttribute("warning", "Invalid email value");
-            RequestDispatcher dispatcher = request.getRequestDispatcher("/instructor/create.jsp");
-            dispatcher.forward(request, response);
+            request.setAttribute("message", "Invalid email value!");
+            showCreateInstructor(request,response);
+
+
         } else if (!checkInput.validatePhone(phoneNum)) {
-            request.setAttribute("success", null);
-            request.setAttribute("error", null);
-            request.setAttribute("warning", "Invalid phone number value");
-            RequestDispatcher dispatcher = request.getRequestDispatcher("/instructor/create.jsp");
-            dispatcher.forward(request, response);
+            request.setAttribute("message", "Invalid phone number value");
+            showCreateInstructor(request,response);
+
         } else {
             Instructor newInstructor = new Instructor(nameIns,Integer.parseInt(gender), mail, address, phoneNum);
             instructorDAO.insertInstructor(newInstructor);
-//            RequestDispatcher dispatcher = request.getRequestDispatcher("instructor/create.jsp");
-//            request.setAttribute("message", "New instructor was created");
-//            System.out.println(newInstructor.getMail());
-            request.setAttribute("success", "New instructor was created");
-            request.setAttribute("error", null);
-            request.setAttribute("warning", null);
-            RequestDispatcher dispatcher = request.getRequestDispatcher("/instructor/create.jsp");
-            dispatcher.forward(request, response);
-//            System.out.println("5");
+            RequestDispatcher dispatcher = request.getRequestDispatcher("instructor/create.jsp");
+            request.setAttribute("message", "New instructor was created");
+
+
         }
     }
     private void showEditInstructor(HttpServletRequest request, HttpServletResponse response)

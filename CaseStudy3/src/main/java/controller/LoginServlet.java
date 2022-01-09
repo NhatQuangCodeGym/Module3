@@ -52,7 +52,7 @@ public class LoginServlet extends HttpServlet {
             session.setAttribute("acc", username);
             session.setAttribute("pass", password);
 
-            resp.sendRedirect("/student");
+            resp.sendRedirect("/home");
         }
     }
 }

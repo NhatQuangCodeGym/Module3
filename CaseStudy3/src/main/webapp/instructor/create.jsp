@@ -31,11 +31,11 @@
             </div><!-- /.container-fluid -->
         </div>
         <!-- Main content -->
-<%--        <p>--%>
-<%--            <c:if test='${requestScope["message"] != null}'>--%>
-<%--                <span class="message">${requestScope["message"]}</span>--%>
-<%--            </c:if>--%>
-<%--        </p>--%>
+        <p>
+            <c:if test='${requestScope["message"] != null}'>
+                <span style="color:red; margin-left: 15px" class="message">${requestScope["message"]}</span>
+            </c:if>
+        </p>
         <section class="content">
             <div class="container-fluid">
                 <div class="row">
@@ -71,7 +71,8 @@
 <%--                                <button type="submit" class="btn btn-primary" href="student">Quay lại</button>--%>
 <%--                                <a href="#" class="btn btn-success" id="submit">Thêm mới</a>--%>
 <%--                                <a href="#" class="btn btn-warning" href="student">Quay lại </a>--%>
-                            <input type="submit" value="Thêm mới" class="btn btn-success" id="submit">
+<%--                            <input type="submit" value="Thêm mới" class="btn btn-success" id="submit">--%>
+                            <button type="submit" class="btn btn-success" id="submit">Thêm mới</button>
                             <a class="btn btn-warning" href="instructor">Quay lại </a>
 <%--                            </div>--%>
                         </form>
@@ -82,56 +83,7 @@
     </div>
     <%@ include file="../layout/footer.jsp"%>
 </div>
-<div id="alert" style="display:none">
-    <c:if test='${requestScope["success"] != null  }'>
-        <script>
-            Swal.fire({
-                icon: 'success',
-                title: 'New student was created',
-                showConfirmButton: false,
-                timer: 1500
-            })
-        </script>
-    </c:if>
-    <c:if test='${requestScope["error"] != null}'>
-        <div class="alert alert-danger" style="position: fixed; bottom: 0; right: 0; left: 0">
-            <button type="button" class="close" data-dismiss="alert">x</button>
-            <strong>Error!</strong> ${requestScope["error"]}
-        </div>
-        <script>
-            $(document).ready(function() {
-                $("#submit").click(function () {
-                    // $(".alert-danger").show();
-                    $(".alert-danger").slideUp("slow");
-                });
 
-                $(".close").click(function () {
-                    // $(".alert-danger").hide();
-                    $(".alert-danger").slideUp("slow");
-                });
-            });
-        </script>
-    </c:if>
-    <c:if test='${requestScope["warning"] != null}'>
-        <div class="alert alert-warning" style="position: fixed; bottom: 0; right: 0; left: 0">
-            <button type="button" class="close" data-dismiss="alert">x</button>
-            <strong>Warning!</strong> ${requestScope["warning"]}
-        </div>
-        <script>
-            $(document).ready(function() {
-                $("#submit").click(function () {
-                    // $(".alert-warning").show();
-                    $(".alert-warning").slideUp("slow");
-                });
-                $(".close").click(function () {
-                    // $(".alert-warning").hide();
-                    $(".alert-warning").slideUp("slow");
-                });
-
-            });
-        </script>
-    </c:if>
-</div>
 </body>
 <%@ include file="../layout/script.jsp"%>
 </html>
