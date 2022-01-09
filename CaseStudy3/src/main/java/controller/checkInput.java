@@ -18,12 +18,7 @@ public class checkInput {
         return matcher.matches();
     }
 
-    public static boolean validateAcc(String regex) {
-        String ACCOUNT_REGEX = "^[_a-z0-9]{6,}$";
-        Pattern pattern = Pattern.compile(ACCOUNT_REGEX);
-        Matcher  matcher = pattern.matcher(regex);
-        return matcher.matches();
-    }
+
 
     public static boolean validateDob(String regex) {
         String ACCOUNT_REGEX = "^(0[1-9]|1[012])[-/.](0[1-9]|[12][0-9]|3[01])[-/.](19|20)\\d\\d$";
