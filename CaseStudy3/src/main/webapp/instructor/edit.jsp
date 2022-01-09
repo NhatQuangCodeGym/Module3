@@ -32,7 +32,11 @@
             </div><!-- /.container-fluid -->
         </div>
         <!-- Main content -->
-
+        <p>
+            <c:if test='${requestScope["message"] != null}'>
+                <span style="color:red; margin-left: 15px" class="message">${requestScope["message"]}</span>
+            </c:if>
+        </p>
 
         <section class="content">
             <div class="container-fluid">

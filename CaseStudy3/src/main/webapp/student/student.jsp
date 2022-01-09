@@ -19,6 +19,12 @@
     <%@ include file="../layout/sidebarleft.jsp"%>
     <!-- Content Wrapper. Contains page content -->
     <div class="content-wrapper">
+        <c:if test="${requestScope['check'] == true}">
+            <script>
+                window.alert('Cập nhật sinh viên thành công');
+                console.log(${success});
+            </script>
+        </c:if>
         <!-- Content Header (Page header) -->
         <div class="content-header">
             <div class="container-fluid">

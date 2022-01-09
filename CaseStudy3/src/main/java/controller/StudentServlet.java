@@ -116,14 +116,10 @@ public class StudentServlet extends HttpServlet {
         String phoneNum = request.getParameter("phoneNum");
 
         if (nameStu.equals("") || gender.equals("") || dob.equals("") || mail.equals("") || address.equals("") || phoneNum.equals("")) {
-            request.setAttribute("success", null);
-            request.setAttribute("error", "Bad or missing input information!");
-            request.setAttribute("warning", null);
-            showCreateStudent(request, response);
+            request.setAttribute("message", "Bad or missing input information!");
+            showCreateStudent(request,response);
         } else if (!checkInput.validateName(nameStu)) {
-            request.setAttribute("success", null);
-            request.setAttribute("error", null);
-            request.setAttribute("warning", "Invalid name value");
+            request.setAttribute("message", "Invalid name value");
             showCreateStudent(request, response);
         } else if (checkInput.validateDob(dob)) {
             request.setAttribute("success", null);
@@ -131,22 +127,14 @@ public class StudentServlet extends HttpServlet {
             request.setAttribute("warning", "Invalid date of birth value");
             showCreateStudent(request, response);
         } else if (!checkInput.validateMail(mail)) {
-            request.setAttribute("success", null);
-            request.setAttribute("error", null);
-            request.setAttribute("warning", "Invalid email value");
+            request.setAttribute("message", "Invalid email value!");
             showCreateStudent(request, response);
         } else if (!checkInput.validatePhone(phoneNum)) {
-            request.setAttribute("success", null);
-            request.setAttribute("error", null);
-            request.setAttribute("warning", "Invalid phone number value");
+            request.setAttribute("message", "Invalid phone number value");
             showCreateStudent(request, response);
         } else {
             Student newStudent = new Student(nameStu, Integer.parseInt(gender), dob, mail, address, phoneNum, 1);
             studentDAO.insertStudent(newStudent);
-
-            request.setAttribute("success", "New student was created");
-            request.setAttribute("error", null);
-            request.setAttribute("warning", null);
             showCreateStudent(request, response);
         }
     }
@@ -174,16 +162,13 @@ public class StudentServlet extends HttpServlet {
         String phoneNum = request.getParameter("phoneNum");
         String status = request.getParameter("status");
         String image = request.getParameter("image");
+        boolean check = false;
 
         if (nameStu.equals("") || gender.equals("") || dob.equals("") || mail.equals("") || address.equals("") || phoneNum.equals("")) {
-            request.setAttribute("success", null);
-            request.setAttribute("error", "Bad or missing input information!");
-            request.setAttribute("warning", null);
+            request.setAttribute("message", "Bad or missing input information!");
             showEditStudent(request, response);
         } else if (!checkInput.validateName(nameStu)) {
-            request.setAttribute("success", null);
-            request.setAttribute("error", null);
-            request.setAttribute("warning", "Invalid name value");
+            request.setAttribute("message", "Invalid name value");
             showEditStudent(request, response);
         } else if (checkInput.validateDob(dob)) {
             request.setAttribute("success", null);
@@ -191,24 +176,16 @@ public class StudentServlet extends HttpServlet {
             request.setAttribute("warning", "Invalid date of birth value");
             showEditStudent(request, response);
         } else if (!checkInput.validateMail(mail)) {
-            request.setAttribute("success", null);
-            request.setAttribute("error", null);
-            request.setAttribute("warning", "Invalid email value");
-            showEditStudent(request, response);
+            request.setAttribute("message", "Invalid email value!");
+            showCreateStudent(request, response);
         } else if (!checkInput.validatePhone(phoneNum)) {
-            request.setAttribute("success", null);
-            request.setAttribute("error", null);
-            request.setAttribute("warning", "Invalid phone number value");
+            request.setAttribute("message", "Invalid phone number value");
             showEditStudent(request, response);
         } else {
             Student newStudent = new Student(Integer.parseInt(id), nameStu,
                     Integer.parseInt(gender), dob, mail, address, phoneNum, Integer.parseInt(status), image);
-            studentDAO.updateStudent(newStudent);
-
-            request.setAttribute("success", "New student was created");
-            request.setAttribute("error", null);
-            request.setAttribute("warning", null);
-            showEditStudent(request, response);
+            check= studentDAO.updateStudent(newStudent);
+            response.sendRedirect(request.getContextPath()+"/student?check="+check);
         }
     }
 

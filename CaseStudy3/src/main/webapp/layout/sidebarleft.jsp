@@ -19,7 +19,7 @@
   <div class="sidebar">
     <!-- Sidebar user panel (optional) -->
     <div class="user-panel mt-3 pb-3 mb-3 d-flex">
-      <d![](../../../../../../../../../../var/folders/_j/v_wyblbn02q8021cw7k4kbsc0000gn/T/TemporaryItems/NSIRD_screencaptureui_DAPXLw/Screen Shot 2022-01-09 at 23.53.26.png)iv class="image">
+      <div class="image">
         <img src="dist/img/user2-160x160.jpg" class="img-circle elevation-2" alt="User Image">
       </div>
       <div class="info">

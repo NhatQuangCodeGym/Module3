@@ -130,7 +130,6 @@ public class InstructorServlet extends HttpServlet {
             request.setAttribute("message", "Invalid email value!");
             showCreateInstructor(request,response);
 
-
         } else if (!checkInput.validatePhone(phoneNum)) {
             request.setAttribute("message", "Invalid phone number value");
             showCreateInstructor(request,response);
@@ -138,8 +137,7 @@ public class InstructorServlet extends HttpServlet {
         } else {
             Instructor newInstructor = new Instructor(nameIns,Integer.parseInt(gender), mail, address, phoneNum);
             instructorDAO.insertInstructor(newInstructor);
-            RequestDispatcher dispatcher = request.getRequestDispatcher("instructor/create.jsp");
-            request.setAttribute("message", "New instructor was created");
+            showCreateInstructor(request,response);
 
 
         }
@@ -161,45 +159,34 @@ public class InstructorServlet extends HttpServlet {
             throws ServletException, SQLException, IOException {
         int id = Integer.parseInt(request.getParameter("id"));
         String name = request.getParameter("name");
-        int gender = Integer.parseInt(request.getParameter("gender"));
+        String gender = request.getParameter("gender");
         String mail = request.getParameter("mail");
         String address = request.getParameter("address");
         String phoneNum = request.getParameter("phoneNum");
         boolean check = false;
-//
-//        if (name.equals("") || mail.equals("") || address.equals("") || phoneNum.equals("")) {
-//            request.setAttribute("success", null);
-//            request.setAttribute("error", "Bad or missing input information!");
-//            request.setAttribute("warning", null);
-//            showEditInstructor(request, response);
-//        } else if (!checkInput.validateName(name)) {
-//            request.setAttribute("success", null);
-//            request.setAttribute("error", null);
-//            request.setAttribute("warning", "Invalid name value");
-//            showEditInstructor(request, response);
-//        } else if (!checkInput.validateMail(mail)) {
-//            request.setAttribute("success", null);
-//            request.setAttribute("error", null);
-//            request.setAttribute("warning", "Invalid email value");
-//            showEditInstructor(request, response);
-//        } else if (!checkInput.validatePhone(phoneNum)) {
-//            request.setAttribute("success", null);
-//            request.setAttribute("error", null);
-//            request.setAttribute("warning", "Invalid phone number value");
-//            showEditInstructor(request, response);
-//        } else {
-            Instructor newInstructor = new Instructor(id, name, gender, mail, address, phoneNum);
+        if (name.equals("") || gender.equals("") || mail.equals("") || address.equals("") || phoneNum.equals("")) {
+            request.setAttribute("message", "Bad or missing input information!");
+            showEditInstructor(request,response);
+
+
+        } else if (!checkInput.validateName(name)) {
+            request.setAttribute("message", "Invalid name value");
+            showEditInstructor(request,response);
+
+        } else if (!checkInput.validateMail(mail)) {
+            request.setAttribute("message", "Invalid email value!");
+            showEditInstructor(request,response);
+
+
+        } else if (!checkInput.validatePhone(phoneNum)) {
+            request.setAttribute("message", "Invalid phone number value");
+            showEditInstructor(request,response);
+
+        } else {
+            Instructor newInstructor = new Instructor(id, name, Integer.parseInt(gender), mail, address, phoneNum);
             check= instructorDAO.updateInstructor(newInstructor);
-           // RequestDispatcher dispatcher=request.getRequestDispatcher("/instructor?check="+check);
-//            request.setAttribute("success", "New instructor was created");
-//            request.setAttribute("error", null);
-//            request.setAttribute("warning", null);
-//            request.setAttribute("check", check);
-     //      listInstructor(request,response);
-         //  dispatcher.forward(request,response);
             response.sendRedirect(request.getContextPath()+"/instructor?check="+check);
-           // showEditInstructor(request, response);
-       // }
+        }
     }
 
 
