@@ -122,35 +122,38 @@ public class InstructorServlet extends HttpServlet {
             request.setAttribute("error", "Bad or missing input information!");
             request.setAttribute("warning", null);
 //            System.out.println("1");
-            showCreateInstructor(request, response);
+
+            RequestDispatcher dispatcher = request.getRequestDispatcher("/instructor/create.jsp");
+            dispatcher.forward(request, response);
         } else if (!checkInput.validateName(nameIns)) {
             request.setAttribute("success", null);
             request.setAttribute("error", null);
             request.setAttribute("warning", "Invalid name value");
-            showCreateInstructor(request, response);
-//            System.out.println("2");
+            RequestDispatcher dispatcher = request.getRequestDispatcher("/instructor/create.jsp");
+            dispatcher.forward(request, response);
         } else if (!checkInput.validateMail(mail)) {
             request.setAttribute("success", null);
             request.setAttribute("error", null);
             request.setAttribute("warning", "Invalid email value");
-            showCreateInstructor(request, response);
-//            System.out.println("3");
+            RequestDispatcher dispatcher = request.getRequestDispatcher("/instructor/create.jsp");
+            dispatcher.forward(request, response);
         } else if (!checkInput.validatePhone(phoneNum)) {
             request.setAttribute("success", null);
             request.setAttribute("error", null);
             request.setAttribute("warning", "Invalid phone number value");
-            showCreateInstructor(request, response);
-//            System.out.println("4");
+            RequestDispatcher dispatcher = request.getRequestDispatcher("/instructor/create.jsp");
+            dispatcher.forward(request, response);
         } else {
             Instructor newInstructor = new Instructor(nameIns,Integer.parseInt(gender), mail, address, phoneNum);
             instructorDAO.insertInstructor(newInstructor);
-            RequestDispatcher dispatcher = request.getRequestDispatcher("instructor/create.jsp");
-            request.setAttribute("message", "New instructor was created");
+//            RequestDispatcher dispatcher = request.getRequestDispatcher("instructor/create.jsp");
+//            request.setAttribute("message", "New instructor was created");
 //            System.out.println(newInstructor.getMail());
             request.setAttribute("success", "New instructor was created");
             request.setAttribute("error", null);
             request.setAttribute("warning", null);
-            showCreateInstructor(request, response);
+            RequestDispatcher dispatcher = request.getRequestDispatcher("/instructor/create.jsp");
+            dispatcher.forward(request, response);
 //            System.out.println("5");
         }
     }

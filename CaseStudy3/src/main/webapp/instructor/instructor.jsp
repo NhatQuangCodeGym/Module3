@@ -64,6 +64,7 @@
                   <th scope="col" >ID</th>
                   <th scope="col">Họ và tên</th>
                   <th scope="col">Giới tính</th>
+                  <th scope="col">Email</th>
                   <th scope="col">Địa chỉ</th>
                   <th scope="col">Số điện thoại</th>
                   <th scope="col">Thao tác</th>
