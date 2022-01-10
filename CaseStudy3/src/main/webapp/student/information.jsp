@@ -1,3 +1,4 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%--
   Created by IntelliJ IDEA.
   User: macbookprom1
@@ -47,27 +48,24 @@
                             <a href="student">Trở về trang quản lý</a>
                         </div>
 
-                        <div class="row">
-                            <div class="col-12 col-sm-12 col-md-4">
-                                <figure class="figure">
-                                    <img src="${student.getImage()}" class="figure-img img-fluid rounded"
-                                         style="width: 370px; height: 370px" alt="Lỗi">
-                                </figure>
-                            </div>
+                        <div class="row" >
                             <div class="col-12 col-sm-12 col-md-8">
                                 <div class="row">
                                     <label class="col-8"><span class="font-weight-bold">Họ và tên:</span> ${student.getName()}</label>
                                 </div>
-                                <c:if test="${student.getGender()} == 1">
-                                    <div class="row">
-                                        <label class="col-8"><span class="font-weight-bold">Giới tính:</span> Nam</label>
-                                    </div>
-                                </c:if>
-                                <c:if test="${student.getGender()} == 0">
-                                    <div class="row">
-                                        <label class="col-8"><span class="font-weight-bold">Giới tính:</span> Nữ</label>
-                                    </div>
-                                </c:if>
+                                <c:choose>
+                                    <c:when test="${student.getGender()==1} ">
+                                        <div class="row">
+                                            <label class="col-8"><span class="font-weight-bold">Giới tính:</span> Nam</label>
+                                        </div>
+                                    </c:when>
+                                    <c:otherwise >
+                                        <div class="row">
+                                            <label class="col-8"><span class="font-weight-bold">Giới tính:</span> Nữ</label>
+                                        </div>
+                                    </c:otherwise>
+                                </c:choose>
+
                                 <div class="row">
                                     <label class="col-8"><span class="font-weight-bold">Ngày sinh:</span> ${student.getDob()}</label>
                                 </div>
@@ -83,16 +81,20 @@
                                 <div class="row">
                                     <label class="col-8">
                                         <span class="font-weight-bold">Trạng thái:</span>
-                                        <c:if test="${student.getStatus() == 1}">
-                                            <td>
-                                                <span class="badge badge-primary">Đang học</span>
-                                            </td>
-                                        </c:if>
-                                        <c:if test="${student.getStatus() == 0}">
-                                            <td>
-                                                <span class="badge badge-danger">Nghỉ học</span>
-                                            </td>
-                                        </c:if>
+                                        <c:choose>
+                                            <c:when test="${student.getStatus() == 1}">
+
+                                                    <span class="badge badge-primary">Đang học</span>
+
+                                            </c:when>
+                                            <c:when test="${student.getStatus() == 0}">
+
+                                                    <span class="badge badge-danger">Nghỉ học</span>
+
+                                            </c:when>
+
+                                        </c:choose>
+
                                     </label>
                                 </div>
                             </div>
@@ -103,7 +105,7 @@
                     <!-- end container-fluid -->
                 </div>
             </div>
-    </div>
+
     </section>
     <!-- /.content-header -->
 </div>

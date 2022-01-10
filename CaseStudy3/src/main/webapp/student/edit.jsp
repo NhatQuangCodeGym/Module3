@@ -1,3 +1,4 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
@@ -52,14 +53,14 @@
                                 <label>Giới tính: </label>
                                 <select name="gender" class="form-control">
                                     <c:choose>
-                                        <c:when test="${instructor.getGender() == 1}">
+                                        <c:when test="${student.getGender() == 1}">
                                             <option value="1" selected>Nam</option>
                                             <option value="0">Nữ</option>
                                         </c:when>
-                                        <c:when test="${instructor.getGender() == 0}">
+                                        <c:otherwise >
                                             <option value="1" >Nam</option>
-                                            <option value="0 selected">Nữ</option>
-                                        </c:when>
+                                            <option value="0" selected>Nữ</option>
+                                        </c:otherwise>
                                     </c:choose>
                                 </select>
                             </div>

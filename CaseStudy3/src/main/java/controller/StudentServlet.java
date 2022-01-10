@@ -97,6 +97,9 @@ public class StudentServlet extends HttpServlet {
             throws SQLException, IOException, ServletException {
         List<Student> studentList = studentDAO.selectAllStudents();
         System.out.println(studentList.size());
+        String check= request.getParameter("check");
+        if (check!= null)
+            request.setAttribute("check",check);
         request.setAttribute("listInstructor", studentList);
         RequestDispatcher dispatcher = request.getRequestDispatcher("/student/student.jsp");
         dispatcher.forward(request, response);
