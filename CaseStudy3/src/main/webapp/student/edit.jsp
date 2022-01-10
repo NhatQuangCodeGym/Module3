@@ -87,6 +87,11 @@
                                         <option value="1">Đang học</option>
                                         <option value="0">Bỏ học</option>
                                     </c:if>
+
+                                    <c:if test="${student.getStatus() == 0}">
+                                        <option value="0">Bỏ học</option>
+                                        <option value="1">Đang học</option>
+                                    </c:if>
                                 </select>
                             </div>
                             <div class="form-group col-12 col-sm-12 col-md-4">
